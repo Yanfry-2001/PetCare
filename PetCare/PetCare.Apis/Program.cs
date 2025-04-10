@@ -1,15 +1,22 @@
+using Microsoft.EntityFrameworkCore;
+using PetCare.Apis.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Configura el DbContext con SQL Server
+builder.Services.AddDbContext<PetDBContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Agrega los controladores
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+// Swagger para pruebas
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Middleware de desarrollo
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

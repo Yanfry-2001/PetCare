@@ -1,4 +1,4 @@
-namespace PetCare.api
+namespace PetCare.Apis
 {
     public class WeatherForecast
     {
